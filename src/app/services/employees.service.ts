@@ -13,7 +13,7 @@ export class EmployeesService {
 
   getAllEmployees(): Observable<any[]>{
 
-    const employees = this._http.get<any[]>("https://localhost:7218/employee")
+    const employees = this._http.get<any[]>("https://localhost:7218/employee/all-employees")
 
     return employees;
   }

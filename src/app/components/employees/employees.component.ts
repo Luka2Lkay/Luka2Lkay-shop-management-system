@@ -6,13 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Employee } from '../../interfaces/employee';
 import { EmployeesService } from '../../services/employees.service';
-
-// const ELEMENT_DATA: Employee[] = [
-//   {position: 1, employeeId: '1234', fullName: 'Luka Lkay', title: 'Developer', dob: '01-03-2024', gender: 'male', email: 'luka@gmail.com', manager: 'John Smith'},
-//   {position: 2, employeeId: '5278', fullName: 'Sikhu Lux', title: 'Tester', dob: '01-03-2020', gender: 'male', email: 'lux@gmail.com', manager: 'David Small'}
-// ];
-
-let ELEMENT_DATA: Employee[] = []
+import { ManagerService } from '../../services/manager.service';
 
 @Component({
   selector: 'app-employees',
@@ -24,32 +18,43 @@ let ELEMENT_DATA: Employee[] = []
 
 export class EmployeesComponent implements OnInit {
 
-constructor(private _employeeService: EmployeesService){}
+constructor(private _employeeService: EmployeesService, private _managerService: ManagerService){}
 
 employees?: Employee[];
+public dataSource: any =[]
 
-
-displayedColumns: string[] = ['employeeNumber'];
-dataSource = new MatTableDataSource(this.employees);
-// dataSource = new MatTableDataSource(ELEMENT_DATA);
-
+displayedColumns: string[] = ['employeeNumber', 'title', 'fullName', 'managerId', 'dob','gender', 'email', 'isActive'];
 
 ngOnInit(){
 this.getAllEmployees()
 }
 
+getManagerInfo(id: number) {
+
+  const managerInfo = this._managerService.getSelectedManagerInfo(id).subscribe({
+    next: (res) => console.log(res.fullName)
+  });
+
+  // console.log(managerInfo.)
+  return managerInfo;
+}
 
 getAllEmployees(): void{
 
   this._employeeService.getAllEmployees().subscribe({
     next: res => {
-      // this.ELEMENT_DATA = res
       this.employees = res
-      // console.log(this.ELEMENT_DATA)},
-      console.log(this.employees)},
+      this.dataSource = new MatTableDataSource(res);
+
+      console.log(res[0].managerId == 2)
+
+      console.log(this.getManagerInfo(res[0].managerId))
+      },
     error: console.log
   })
 }
+
+
 
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
