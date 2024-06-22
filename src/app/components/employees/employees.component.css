@@ -11,4 +11,12 @@ table {
     font-size: 14px;
     width: 100%;
   }
+
+  .add-button {
+    background-color: #0000ff;
+    color: #fff;
+    position: relative;
+    left: 95%;
+    margin-bottom: 2em;
+  }
   

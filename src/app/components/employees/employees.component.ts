@@ -6,37 +6,27 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Employee } from '../../interfaces/employee';
 import { EmployeesService } from '../../services/employees.service';
-import { ManagerService } from '../../services/manager.service';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-employees',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, MatFormFieldModule, MatInputModule, MatTableModule],
+  imports: [RouterOutlet, RouterLink, MatFormFieldModule, MatIconModule, MatButtonModule, MatInputModule, MatTableModule],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css'
 })
 
 export class EmployeesComponent implements OnInit {
 
-constructor(private _employeeService: EmployeesService, private _managerService: ManagerService){}
+constructor(private _employeeService: EmployeesService){}
 
 employees?: Employee[];
 public dataSource: any =[]
 
-displayedColumns: string[] = ['employeeNumber', 'title', 'fullName', 'managerId', 'dob','gender', 'email', 'isActive'];
+displayedColumns: string[] = ['employeeNumber', 'title', 'fullName', 'manager', 'dob','gender', 'email', 'isActive', 'actions'];
 
 ngOnInit(){
 this.getAllEmployees()
-}
-
-getManagerInfo(id: number) {
-
-  const managerInfo = this._managerService.getSelectedManagerInfo(id).subscribe({
-    next: (res) => console.log(res.fullName)
-  });
-
-  // console.log(managerInfo.)
-  return managerInfo;
 }
 
 getAllEmployees(): void{
@@ -45,10 +35,6 @@ getAllEmployees(): void{
     next: res => {
       this.employees = res
       this.dataSource = new MatTableDataSource(res);
-
-      console.log(res[0].managerId == 2)
-
-      console.log(this.getManagerInfo(res[0].managerId))
       },
     error: console.log
   })

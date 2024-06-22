@@ -9,11 +9,9 @@ export class EmployeesService {
 
   constructor(private _http: HttpClient) { }
 
-  // public baseUrl:string = 
-
   getAllEmployees(): Observable<any[]>{
 
-    const employees = this._http.get<any[]>("https://localhost:7218/employee/all-employees")
+    const employees = this._http.get<any[]>("https://localhost:7218/employee/employees-with-managers")
 
     return employees;
   }
