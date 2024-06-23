@@ -19,4 +19,11 @@ table {
     left: 95%;
     margin-bottom: 2em;
   }
+
+  .edit-icon{
+    color: #0000ff;
+  }
   
+  .delete-icon {
+    color: #ff0000;
+  }

@@ -35,11 +35,19 @@ getAllEmployees(): void{
     next: res => {
       this.employees = res
       this.dataSource = new MatTableDataSource(res);
+      console.log(res)
       },
     error: console.log
   })
 }
 
+edit(id: number){
+  console.log(id)
+}
+
+delete(id: number){
+  console.log(id)
+}
 
 
 applyFilter(event: Event) {
