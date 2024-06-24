@@ -16,4 +16,10 @@ export class EmployeesService {
     return employees;
   }
 
+  addEmployee(data: any): Observable<any> {
+    const employee = this._http.post<any>("https://localhost:7218/employee/add", data)
+
+    return employee;
+  }
+
 }

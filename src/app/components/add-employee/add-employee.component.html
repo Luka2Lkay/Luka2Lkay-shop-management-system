@@ -1,0 +1,69 @@
+<div mat-dialog-title class="modal-title">
+    <h1>Add Employee</h1>
+</div>
+
+<form [formGroup]="employeeForm" (ngSubmit)="save()">
+
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field id="employeeNumber" appearance="outline">
+                <mat-label>Employee Number</mat-label>
+                <input matInput formControlName="employeeNumber" required="true">
+            </mat-form-field>
+
+            <mat-form-field id="title" appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" required="true">
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field id="fullName" appearance="outline">
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="fullName" required="true">
+            </mat-form-field>
+
+            <mat-form-field id="manager" appearance="outline">
+                <mat-label for="manager">Manager</mat-label>
+                <mat-select formControlName="manager" require="true">
+                    <mat-option *ngFor="let manager of managerNames"
+                        [value]="manager.fullName">{{manager.fullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field id="dob" appearance="outline">
+                <mat-label>Date of birth</mat-label>
+                <input matInput formControlName="dob" required="true">
+            </mat-form-field>
+
+            <mat-form-field id="gender" appearance="outline">
+                <mat-label for="gender">Gender</mat-label>
+                <mat-select formControlName="gender" require="true">
+                    <mat-option *ngFor="let gender of genderOptions" [value]="gender">{{gender}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field id="email" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required="true">
+            </mat-form-field>
+
+            <mat-form-field id="isActive" appearance="outline">
+                <mat-label for="isActive">Active</mat-label>
+                <mat-select formControlName="isActive" require="true">
+                    <mat-option *ngFor="let active of activeOptions" [value]="active">{{active}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-raised-button (click)="onCancel()">CANCEL</button>
+            <button mat-raised-button color="primary" [disabled]="!this.employeeForm.valid" type="submit">SAVE</button>
+        </div>
+
+    </div>
+</form>

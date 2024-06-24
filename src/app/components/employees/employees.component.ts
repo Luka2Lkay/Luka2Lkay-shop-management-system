@@ -1,58 +1,77 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { Employee } from '../../interfaces/employee';
 import { EmployeesService } from '../../services/employees.service';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 
 @Component({
   selector: 'app-employees',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, MatFormFieldModule, MatIconModule, MatButtonModule, MatInputModule, MatTableModule],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatTableModule,
+  ],
   templateUrl: './employees.component.html',
-  styleUrl: './employees.component.css'
+  styleUrl: './employees.component.css',
 })
-
 export class EmployeesComponent implements OnInit {
+  constructor(private _employeeService: EmployeesService, private _dialog: MatDialog) {}
 
-constructor(private _employeeService: EmployeesService){}
+  employees?: Employee[];
+  public dataSource: any = [];
 
-employees?: Employee[];
-public dataSource: any =[]
+  displayedColumns: string[] = [
+    'employeeNumber',
+    'title',
+    'fullName',
+    'manager',
+    'dob',
+    'gender',
+    'email',
+    'isActive',
+    'actions',
+  ];
 
-displayedColumns: string[] = ['employeeNumber', 'title', 'fullName', 'manager', 'dob','gender', 'email', 'isActive', 'actions'];
+  ngOnInit() {
+    this.getAllEmployees();
+  }
 
-ngOnInit(){
-this.getAllEmployees()
-}
-
-getAllEmployees(): void{
-
-  this._employeeService.getAllEmployees().subscribe({
-    next: res => {
-      this.employees = res
-      this.dataSource = new MatTableDataSource(res);
-      console.log(res)
+  getAllEmployees(): void {
+    this._employeeService.getAllEmployees().subscribe({
+      next: (res) => {
+        this.employees = res;
+        this.dataSource = new MatTableDataSource(res);
+        console.log(res);
       },
-    error: console.log
-  })
-}
+      error: console.log,
+    });
+  }
 
-edit(id: number){
-  console.log(id)
-}
+  edit(id: number) {
+    console.log(id);
+  }
 
-delete(id: number){
-  console.log(id)
-}
+  delete(id: number) {
+    console.log(id);
+  }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
-applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
-
+  openForm(){
+    this._dialog.open(AddEmployeeComponent);
+  }
 }

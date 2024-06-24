@@ -28,3 +28,9 @@ table {
   .delete-icon {
     color: #ff0000;
   }
+
+  .title {
+    font-size: 3rem;
+    font-weight: 500;
+    color: #0000ff;
+}
