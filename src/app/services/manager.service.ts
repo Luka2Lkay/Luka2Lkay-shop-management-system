@@ -9,10 +9,17 @@ export class ManagerService {
 
   constructor(private _http: HttpClient) { }
 
-  getSelectedManagerInfo(id : number): Observable<any>{
+  getAllManagers(): Observable<any[]>{
 
-    const selectedManagerInfo = this._http.get<any>(`https://localhost:7218/manager/selected-info?id=${id}`);
+    const managers = this._http.get<any[]>("https://localhost:7218/manager/all-managers");
 
-    return selectedManagerInfo;
+    return managers;
+  }
+
+  getAllManagerNames(): Observable<any[]>{
+
+    const names = this._http.get<any[]>("https://localhost:7218/manager/manager-names");
+
+    return names;
   }
 }
