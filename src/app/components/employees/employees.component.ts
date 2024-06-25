@@ -62,10 +62,16 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  edit(id: number) {
-    console.log(id);
+  edit(data: Employee) {
+    const dialog = this._dialog.open(AddEmployeeComponent, {data});
 
-    window.location.reload();
+    dialog.afterClosed().subscribe({
+      next: () => {
+        this.getAllEmployees()
+      },
+      error: console.log
+    })
+
   }
 
   delete(id: number) {

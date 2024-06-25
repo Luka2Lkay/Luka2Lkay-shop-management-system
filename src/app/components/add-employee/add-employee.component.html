@@ -72,7 +72,7 @@
 
         <div mat-dialog-actions>
             <button mat-raised-button mat-dialog-close>CANCEL</button>
-            <button mat-raised-button color="primary" [disabled]="!this.employeeForm.valid" type="submit">SAVE</button>
+            <button mat-raised-button color="primary" [disabled]="!this.employeeForm.valid" type="submit">{{data ? 'UPDATE' : 'SAVE'}}</button>
         </div>
 
     </div>
