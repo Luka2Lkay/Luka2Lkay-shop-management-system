@@ -1,10 +1,12 @@
 export interface Employee {
-    position: number,
-    employeeId: string,
-    fullName: string;
+    employeeNumber: string,
     title: string, 
+    fullName: string,
+    managerId: number,
     dob: string, 
     gender: string, 
     email: string, 
-    manager: string
+    isActive: boolean
 }
+
+

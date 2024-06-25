@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,7 @@ import { EmployeesService } from '../../services/employees.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -26,7 +27,11 @@ import { AddEmployeeComponent } from '../add-employee/add-employee.component';
   styleUrl: './employees.component.css',
 })
 export class EmployeesComponent implements OnInit {
-  constructor(private _employeeService: EmployeesService, private _dialog: MatDialog) {}
+  constructor(
+    private _employeeService: EmployeesService,
+    private _dialog: MatDialog,
+    private _router: Router
+  ) {}
 
   employees?: Employee[];
   public dataSource: any = [];
@@ -59,13 +64,17 @@ export class EmployeesComponent implements OnInit {
 
   edit(id: number) {
     console.log(id);
+
+    window.location.reload();
   }
 
   delete(id: number) {
     this._employeeService.deleteEmployee(id).subscribe({
-      next: () => {},
-      error: console.log
-    })
+      next: () => {
+        window.location.reload();
+      },
+      error: console.log,
+    });
   }
 
   applyFilter(event: Event) {
@@ -73,7 +82,7 @@ export class EmployeesComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openForm(){
+  openForm() {
     this._dialog.open(AddEmployeeComponent);
   }
 }
