@@ -11,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule, MatDialogClose } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule, MatDialogClose, MatDialog } from '@angular/material/dialog';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -25,7 +25,7 @@ import { NgFor } from '@angular/common';
     MatInputModule,
     NgFor,
     MatButtonModule,
-    MatDialogClose
+    MatDialogClose,
   ],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.css',
@@ -36,6 +36,7 @@ export class AddEmployeeComponent implements OnInit {
  
   constructor(private _managerService : ManagerService, 
     private _dialogRef : MatDialogRef<AddEmployeeComponent>, 
+    private tes : MatDialog,
     private _employeesService : EmployeesService,
     private _router : Router, 
     @Inject(MAT_DIALOG_DATA) public data : any
@@ -46,7 +47,8 @@ export class AddEmployeeComponent implements OnInit {
     employeeNumber : new FormControl(''),
     title : new FormControl(''),
     fullName : new FormControl(''),
-    manager: new FormControl(''),
+    // manager: new FormControl(''),
+    managerId: new FormControl(''),
     dob : new FormControl(''),
     gender : new FormControl(''),
     email : new FormControl(''),
@@ -72,28 +74,32 @@ export class AddEmployeeComponent implements OnInit {
   }
 
 onCancel(){
-  this._dialogRef.close();
-  console.log("hello")
+  this.tes.closeAll()
 }
 
   save() {
 
     let formData = new FormData();
 
-    formData.append("employeeNumber", this.employeeForm.value.employeeNumber);
-    formData.append("title", this.employeeForm.value.title);
-    formData.append("fullName", this.employeeForm.value.fullName);
-    formData.append("manager", this.employeeForm.value.manager);
-    formData.append("dob", this.employeeForm.value.dob);
-    formData.append("gender", this.employeeForm.value.gender);
-    formData.append("email", this.employeeForm.value.email);
-    formData.append("isActive", this.employeeForm.value.isActive)
 
-    // this._employeesService.addEmployee(formData).subscribe({
-    //   next: () => {
-    //     this.onCancel();
-    //   },
-    //   error: console.log
-    // })
+    // formData.append("employeeNumber", this.employeeForm.value.employeeNumber);
+    // formData.append("title", this.employeeForm.value.title);
+    // formData.append("fullName", this.employeeForm.value.fullName);
+    // formData.append("managerId", this.employeeForm.value.managerId);
+    // formData.append("dob", this.employeeForm.value.dob);
+    // formData.append("gender", this.employeeForm.value.gender);
+    // formData.append("email", this.employeeForm.value.email);
+    // formData.append("isActive", true)
+
+    console.log(this.employeeForm.value);
+
+    this._employeesService.addEmployee(this.employeeForm.value).subscribe({
+      next: () => {
+       console.log(formData.getAll('title'))
+       this.onCancel()
+
+      },
+      error: console.log
+    })
   }
 }

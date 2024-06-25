@@ -23,13 +23,18 @@
                 <input matInput formControlName="fullName" required="true">
             </mat-form-field>
 
-            <mat-form-field id="manager" appearance="outline">
+            <mat-form-field id="managerId" appearance="outline">
+                <mat-label>Manager Id</mat-label>
+                <input matInput formControlName="managerId" required="true">
+            </mat-form-field>
+
+            <!-- <mat-form-field id="manager" appearance="outline">
                 <mat-label for="manager">Manager</mat-label>
                 <mat-select formControlName="manager" require="true">
                     <mat-option *ngFor="let manager of managerNames"
                         [value]="manager.fullName">{{manager.fullName}}</mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
         </div>
 
         <div class="row">
