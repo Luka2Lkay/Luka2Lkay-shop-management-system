@@ -52,7 +52,6 @@ export class EmployeesComponent implements OnInit {
       next: (res) => {
         this.employees = res;
         this.dataSource = new MatTableDataSource(res);
-        console.log(res);
       },
       error: console.log,
     });
@@ -63,7 +62,10 @@ export class EmployeesComponent implements OnInit {
   }
 
   delete(id: number) {
-    console.log(id);
+    this._employeeService.deleteEmployee(id).subscribe({
+      next: () => {},
+      error: console.log
+    })
   }
 
   applyFilter(event: Event) {
