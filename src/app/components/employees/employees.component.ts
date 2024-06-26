@@ -9,7 +9,9 @@ import { EmployeesService } from '../../services/employees.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-employees',
@@ -22,6 +24,7 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatInputModule,
     MatTableModule,
+    NavbarComponent
   ],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css',

@@ -1,5 +1,6 @@
 h1 {
     text-align: center;
+    margin-top: 2em;
 }
 
 /* Structure */
@@ -23,10 +24,12 @@ table {
   .edit-icon{
     color: #0000ff;
     margin-left: 10px;
+    cursor: pointer;
   }
   
   .delete-icon {
     color: #ff0000;
+    cursor: pointer;
   }
 
   .title {
@@ -34,3 +37,4 @@ table {
     font-weight: 500;
     color: #0000ff;
 }
+

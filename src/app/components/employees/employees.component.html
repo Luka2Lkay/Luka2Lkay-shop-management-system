@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <h1 class="title">Employees</h1>
 <!-- <nav>
   <ul>
@@ -54,7 +56,7 @@
 
       <ng-container matColumnDef="isActive">
         <th mat-header-cell *matHeaderCellDef> Active </th>
-        <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.isActive === true ? 'Yes' : 'No'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="actions">

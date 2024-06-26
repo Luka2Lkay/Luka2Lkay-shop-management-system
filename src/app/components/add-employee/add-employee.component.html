@@ -65,7 +65,7 @@
             <mat-form-field id="isActive" appearance="outline">
                 <mat-label for="isActive">Active</mat-label>
                 <mat-select formControlName="isActive" require="true">
-                    <mat-option *ngFor="let active of activeOptions" [value]="active">{{active}}</mat-option>
+                    <mat-option *ngFor="let active of activeOptions" [value]="active">{{active === true ? 'Yes' : 'No'}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

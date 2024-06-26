@@ -58,8 +58,8 @@ export class AddEmployeeComponent implements OnInit {
     employeeNumber: new FormControl(''),
     title: new FormControl(''),
     fullName: new FormControl(''),
-    // manager: new FormControl(''),
-    managerId: new FormControl(''),
+    manager: new FormControl(''),
+    // managerId: new FormControl(''),
     dob: new FormControl(''),
     gender: new FormControl(''),
     email: new FormControl(''),
@@ -74,20 +74,19 @@ export class AddEmployeeComponent implements OnInit {
     this.employeeForm.patchValue(this.data);
   }
 
-  getAllManagers(): void {
-    this._managerService.getAllManagers().subscribe({
-      next: (res) => {
-        this.managerNames = res;
-      },
-      error: console.log,
-    });
-  }
+  // getAllManagers(): void {
+  //   this._managerService.getAllManagers().subscribe({
+  //     next: (res) => {
+  //       this.managerNames = res;
+  //     },
+  //     error: console.log,
+  //   });
+  // }
 
   save() {
     if (this.employeeForm.valid) {
       if (this.data) {
         this.employeeForm.value['id'] = this.data.id;
-
         this._employeesService
           .updateEmployee(this.employeeForm.value)
           .subscribe({
@@ -95,14 +94,15 @@ export class AddEmployeeComponent implements OnInit {
               window.location.reload();
             },
           });
+      } else {
+        console.log(this.employeeForm.value);
+        this._employeesService.addEmployee(this.employeeForm.value).subscribe({
+          next: () => {
+            window.location.reload();
+          },
+          error: console.log,
+        });
       }
-    } else {
-      this._employeesService.addEmployee(this.employeeForm.value).subscribe({
-        next: () => {
-          window.location.reload();
-        },
-        error: console.log,
-      });
     }
   }
 }
