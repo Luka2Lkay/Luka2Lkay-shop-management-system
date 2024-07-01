@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
+import { LowerCasePipe } from '@angular/common';
 
 
 @Component({
@@ -24,7 +25,8 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatInputModule,
     MatTableModule,
-    NavbarComponent
+    NavbarComponent,
+    LowerCasePipe
   ],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css',
@@ -66,6 +68,8 @@ export class EmployeesComponent implements OnInit {
   }
 
   edit(data: Employee) {
+
+    console.log(data)
     const dialog = this._dialog.open(AddEmployeeComponent, {data});
 
     dialog.afterClosed().subscribe({

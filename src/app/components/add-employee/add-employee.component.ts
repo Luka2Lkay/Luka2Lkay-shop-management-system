@@ -4,7 +4,7 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmployeesService } from '../../services/employees.service';
 import { ManagerService } from '../../services/manager.service';
 
@@ -57,46 +57,57 @@ export class AddEmployeeComponent implements OnInit {
   employeeForm: FormGroup = new FormGroup({
     employeeNumber: new FormControl(''),
     title: new FormControl(''),
-    fullName: new FormControl(''),
-    manager: new FormControl(''),
-    // managerId: new FormControl(''),
+    fullName: new FormControl('', [Validators.required, Validators.pattern(/^([A-Z][a-z]+)( [A-Z][a-z]+)*$/)]),
+    managerId: new FormControl(''),
     dob: new FormControl(''),
     gender: new FormControl(''),
     email: new FormControl(''),
     isActive: new FormControl(''),
   });
 
-  managerNames?: any[];
+  managerNames: string[] = ["sikhu", "Lukhanyo"]
   genderOptions: string[] = ['Male', 'Female'];
   activeOptions: boolean[] = [true, false];
 
   ngOnInit(): void {
+    this.managerNames
+    this.getAllManagers()
     this.employeeForm.patchValue(this.data);
   }
 
-  // getAllManagers(): void {
-  //   this._managerService.getAllManagers().subscribe({
-  //     next: (res) => {
-  //       this.managerNames = res;
-  //     },
-  //     error: console.log,
-  //   });
-  // }
+//Get all employees and not managers.
+
+  getAllManagers(): void {
+    this._managerService.getAllManagers().subscribe({
+      next: (res : any) => {
+        // this.managerNames = res
+        console.log(res)
+      },
+      error: console.log,
+    });
+  }
 
   save() {
     if (this.employeeForm.valid) {
-      if (this.data) {
-        this.employeeForm.value['id'] = this.data.id;
-        this._employeesService
-          .updateEmployee(this.employeeForm.value)
+
+      const formDetails = this.employeeForm.value;
+      
+      if (this.data) {      
+
+        formDetails.managerId = formDetails.managerId.id
+        formDetails['id'] = this.data.id;
+
+        this._employeesService 
+          .updateEmployee(formDetails)
           .subscribe({
             next: () => {
               window.location.reload();
             },
           });
       } else {
-        console.log(this.employeeForm.value);
-        this._employeesService.addEmployee(this.employeeForm.value).subscribe({
+        formDetails.managerId = formDetails.managerId.id
+
+        this._employeesService.addEmployee(formDetails).subscribe({
           next: () => {
             window.location.reload();
           },
