@@ -25,6 +25,7 @@ import {
 } from '@angular/material/dialog';
 import { NgFor } from '@angular/common';
 import { Employee } from '../../interfaces/employee';
+import { Manager } from '../../interfaces/manager';
 
 @Component({
   selector: 'app-add-employee',
@@ -58,14 +59,14 @@ export class AddEmployeeComponent implements OnInit {
     employeeNumber: new FormControl(''),
     title: new FormControl(''),
     fullName: new FormControl('', [Validators.required, Validators.pattern(/^([A-Z][a-z]+)( [A-Z][a-z]+)*$/)]),
-    managerId: new FormControl(''),
+    currentManager: new FormControl(''),
     dob: new FormControl(''),
     gender: new FormControl(''),
     email: new FormControl(''),
     isActive: new FormControl(''),
   });
 
-  managerNames: string[] = ["sikhu", "Lukhanyo"]
+  managerNames?: string[];
   genderOptions: string[] = ['Male', 'Female'];
   activeOptions: boolean[] = [true, false];
 
@@ -75,13 +76,12 @@ export class AddEmployeeComponent implements OnInit {
     this.employeeForm.patchValue(this.data);
   }
 
-//Get all employees and not managers.
-
   getAllManagers(): void {
     this._managerService.getAllManagers().subscribe({
       next: (res : any) => {
-        // this.managerNames = res
-        console.log(res)
+        const names = res.map((object: Manager) => object.fullName)
+        this.managerNames = names
+       
       },
       error: console.log,
     });
