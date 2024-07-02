@@ -57,7 +57,7 @@ export class ManagersComponent implements OnInit {
   getManagersWithEmployees() : void {
       this._managerService.getManagersWithEmployees().subscribe({
         next: res => {
-          this.dataSource = res;
+          this.dataSource = new MatTableDataSource(res)
         },
         error: console.log
       })

@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { LowerCasePipe } from '@angular/common';
+import { DataSource } from '@angular/cdk/collections';
 
 
 @Component({
@@ -33,8 +34,8 @@ export class EmployeesComponent implements OnInit {
     private _dialog: MatDialog
   ) {}
 
-  employees?: Employee[];
   public dataSource: any = [];
+
   managers = "managers"
 
   displayedColumns: string[] = [
@@ -56,7 +57,6 @@ export class EmployeesComponent implements OnInit {
   getAllEmployees(): void {
     this._employeeService.getAllEmployees().subscribe({
       next: (res) => {
-        this.employees = res;
         this.dataSource = new MatTableDataSource(res);
       },
       error: console.log,
