@@ -58,7 +58,10 @@ export class AddEmployeeComponent implements OnInit {
   employeeForm: FormGroup = new FormGroup({
     employeeNumber: new FormControl(''),
     title: new FormControl(''),
-    fullName: new FormControl('', [Validators.required, Validators.pattern(/^([A-Z][a-z]+)( [A-Z][a-z]+)*$/)]),
+    fullName: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^([A-Z][a-z]+)( [A-Z][a-z]+)*$/),
+    ]),
     currentManager: new FormControl(''),
     dob: new FormControl(''),
     gender: new FormControl(''),
@@ -72,16 +75,16 @@ export class AddEmployeeComponent implements OnInit {
   activeOptions: boolean[] = [true, false];
 
   ngOnInit(): void {
-    this.getAllManagers()
+    this.getAllManagers();
     this.employeeForm.patchValue(this.data);
   }
 
   getAllManagers(): void {
     this._managerService.getAllManagers().subscribe({
-      next: (res : any) => {
-        const names = res.map((object: Manager) => object.fullName)
-        this.managerNames = names
-        this.managers = res
+      next: (res: any) => {
+        const names = res.map((object: Manager) => object.fullName);
+        this.managerNames = names;
+        this.managers = res;
       },
       error: console.log,
     });
@@ -89,40 +92,38 @@ export class AddEmployeeComponent implements OnInit {
 
   save() {
     if (this.employeeForm.valid) {
-
       const formDetails = this.employeeForm.value;
-      
-      if (this.data) {      
 
-        if(this.managers) {
-          for(let i = 0; i < this.managers.length; i++) {
+      if (this.data) {
+        if (this.managers) {
+          for (let i = 0; i < this.managers.length; i++) {
             if (this.managers[i].fullName === formDetails.currentManager) {
-              formDetails.managerId = this.managers[i].id
-              formDetails.id = this.data.id
-              console.log(formDetails)
-             
+              formDetails.managerId = this.managers[i].id;
+              formDetails.id = this.data.id;
 
-              this._employeesService 
-              .updateEmployee(formDetails)
-              .subscribe({
+              this._employeesService.updateEmployee(formDetails).subscribe({
                 next: () => {
                   window.location.reload();
                 },
               });
             }
-
-
           }
         }
       } else {
-        formDetails.managerId = formDetails.managerId.id
+        if (this.managers) {
+          for (let i = 0; i < this.managers.length; i++) {
+            if (this.managers[i].fullName === formDetails.currentManager) {
+              formDetails.managerId = this.managers[i].id;
 
-        this._employeesService.addEmployee(formDetails).subscribe({
-          next: () => {
-            window.location.reload();
-          },
-          error: console.log,
-        });
+              this._employeesService.addEmployee(formDetails).subscribe({
+                next: () => {
+                  window.location.reload();
+                },
+                error: console.log,
+              });
+            }
+          }
+        }
       }
     }
   }

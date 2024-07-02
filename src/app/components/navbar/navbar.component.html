@@ -1,9 +1,14 @@
 <mat-toolbar class="nav">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon class="menu-icon">menu</mat-icon>
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon class="menu-icon">menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>group</mat-icon>
+      <span routerLink="/managers">Managers</span>
     </button>
-    <span class="name">KwaLuka</span>
-    <span class="example-spacer"></span>
-      <a routerLink="#" class="log-out">Log Out</a>
-  </mat-toolbar>
-  
+  </mat-menu>
+  <span class="name">KwaLuka</span>
+  <span class="example-spacer"></span>
+  <a routerLink="#" class="log-out">Log Out</a>
+</mat-toolbar>
