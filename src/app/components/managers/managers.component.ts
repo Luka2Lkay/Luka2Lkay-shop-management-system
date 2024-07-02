@@ -68,6 +68,13 @@ export class ManagersComponent implements OnInit {
 
     const dialog = this._dialog.open(AddManagerComponent, { data });
 
+    
+    dialog.afterClosed().subscribe({
+      next: () => {
+        this.getManagersWithEmployees();
+      },
+      error: console.log,
+    });
   }
 
 delete(data: Manager) : void {

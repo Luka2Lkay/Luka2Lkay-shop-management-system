@@ -46,6 +46,8 @@ import { NgFor } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddManagerComponent implements OnInit {
+
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: Manager) {}
 
   managerForm: FormGroup = new FormGroup({
@@ -60,7 +62,9 @@ export class AddManagerComponent implements OnInit {
     isActive: new FormControl(''),
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.managerForm.patchValue(this.data)
+  }
 
   genderOptions: string[] = ['Male', 'Female'];
   activeOptions: boolean[] = [true, false];
