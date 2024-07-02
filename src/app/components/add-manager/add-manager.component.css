@@ -1,0 +1,19 @@
+.content {
+    padding-top: 10px;
+    overflow: hidden;
+}
+
+
+.row {
+    display: flex;
+    gap: 10px
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.modal-title {
+    text-align: center;
+    color: #0000ff;
+}

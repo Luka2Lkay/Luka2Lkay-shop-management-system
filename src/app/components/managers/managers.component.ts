@@ -66,6 +66,8 @@ export class ManagersComponent implements OnInit {
 
   edit(data: Manager) : void {
 
+    const dialog = this._dialog.open(AddManagerComponent, { data });
+
   }
 
 delete(data: Manager) : void {
@@ -73,7 +75,7 @@ delete(data: Manager) : void {
 }
 
 view(data: Manager) {
-  
+
 }
 
   applyFilter(event: Event) {

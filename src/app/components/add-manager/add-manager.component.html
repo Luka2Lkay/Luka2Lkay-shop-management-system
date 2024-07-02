@@ -1,1 +1,56 @@
-<p>add-manager works!</p>
+<div mat-dialog-title class="modal-title">
+    <h1>Add Manager</h1>
+</div>
+
+<form [formGroup]="managerForm" (ngSubmit)="save()">
+
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field id="employeeNumber" appearance="outline">
+                <mat-label>Employee Number</mat-label>
+                <input matInput formControlName="employeeNumber" required="true">
+            </mat-form-field>
+
+            <mat-form-field id="fullName" appearance="outline">
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="fullName" required="true">
+            </mat-form-field>
+        </div> 
+
+        <div class="row">
+            <mat-form-field id="dob" appearance="outline">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dob">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field id="gender" appearance="outline">
+                <mat-label for="gender">Gender</mat-label>
+                <mat-select formControlName="gender" require="true">
+                    <mat-option *ngFor="let gender of genderOptions" [value]="gender">{{gender}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field id="email" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required="true">
+            </mat-form-field>
+
+            <mat-form-field id="isActive" appearance="outline">
+                <mat-label for="isActive">Active</mat-label>
+                <mat-select formControlName="isActive" require="true">
+                    <mat-option *ngFor="let active of activeOptions" [value]="active">{{active === true ? 'Yes' : 'No'}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-raised-button mat-dialog-close>CANCEL</button>
+            <button mat-raised-button color="primary" [disabled]="!this.managerForm.valid" type="submit">{{data ? 'UPDATE' : 'SAVE'}}</button>
+        </div>
+
+    </div>
+</form>
