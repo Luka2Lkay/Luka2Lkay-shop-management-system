@@ -67,11 +67,11 @@ export class AddEmployeeComponent implements OnInit {
   });
 
   managerNames?: string[];
+  managers?: Manager[];
   genderOptions: string[] = ['Male', 'Female'];
   activeOptions: boolean[] = [true, false];
 
   ngOnInit(): void {
-    this.managerNames
     this.getAllManagers()
     this.employeeForm.patchValue(this.data);
   }
@@ -81,7 +81,7 @@ export class AddEmployeeComponent implements OnInit {
       next: (res : any) => {
         const names = res.map((object: Manager) => object.fullName)
         this.managerNames = names
-       
+        this.managers = res
       },
       error: console.log,
     });
@@ -94,16 +94,26 @@ export class AddEmployeeComponent implements OnInit {
       
       if (this.data) {      
 
-        formDetails.managerId = formDetails.managerId.id
-        formDetails['id'] = this.data.id;
+        if(this.managers) {
+          for(let i = 0; i < this.managers.length; i++) {
+            if (this.managers[i].fullName === formDetails.currentManager) {
+              formDetails.managerId = this.managers[i].id
+              formDetails.id = this.data.id
+              console.log(formDetails)
+             
 
-        this._employeesService 
-          .updateEmployee(formDetails)
-          .subscribe({
-            next: () => {
-              window.location.reload();
-            },
-          });
+              this._employeesService 
+              .updateEmployee(formDetails)
+              .subscribe({
+                next: () => {
+                  window.location.reload();
+                },
+              });
+            }
+
+
+          }
+        }
       } else {
         formDetails.managerId = formDetails.managerId.id
 
