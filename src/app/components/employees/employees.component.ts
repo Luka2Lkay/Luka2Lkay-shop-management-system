@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -10,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { Router } from '@angular/router';
 import { LowerCasePipe } from '@angular/common';
 
 
@@ -18,8 +16,6 @@ import { LowerCasePipe } from '@angular/common';
   selector: 'app-employees',
   standalone: true,
   imports: [
-    RouterOutlet,
-    RouterLink,
     MatFormFieldModule,
     MatIconModule,
     MatButtonModule,
@@ -34,8 +30,7 @@ import { LowerCasePipe } from '@angular/common';
 export class EmployeesComponent implements OnInit {
   constructor(
     private _employeeService: EmployeesService,
-    private _dialog: MatDialog,
-    private _router: Router
+    private _dialog: MatDialog
   ) {}
 
   employees?: Employee[];
@@ -68,7 +63,7 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  edit(data: Employee) {
+  edit(data: Employee) : void {
     const dialog = this._dialog.open(AddEmployeeComponent, {data});
 
     dialog.afterClosed().subscribe({
@@ -80,7 +75,7 @@ export class EmployeesComponent implements OnInit {
 
   }
 
-  delete(id: number) {
+  delete(id: number) : void {
     this._employeeService.deleteEmployee(id).subscribe({
       next: () => {
         window.location.reload();
@@ -89,12 +84,12 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event) : void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openForm() {
+  openForm() : void {
     this._dialog.open(AddEmployeeComponent);
   }
 }

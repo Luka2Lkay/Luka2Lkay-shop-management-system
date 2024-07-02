@@ -17,10 +17,10 @@ export class ManagerService {
     return managers;
   }
 
-  getAllManagerNames(): Observable<Manager[]>{
+  getManagersWithEmployees(): Observable<Manager[]>{
 
-    const names = this._http.get<any[]>("https://localhost:7218/manager/manager-names");
+    const managers = this._http.get<Manager[]>("https://localhost:7218/manager/managers-with-employees");
 
-    return names;
+    return managers;
   }
 }

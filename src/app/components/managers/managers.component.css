@@ -1,0 +1,46 @@
+h1 {
+    text-align: center;
+    margin-top: 2em;
+}
+
+/* Structure */
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .filter {
+    position: relative;
+    left: -4em;
+    width: 25%;
+  }
+
+  .add-button {
+    background-color: #0000ff;
+    color: #fff;
+    position: relative;
+    left: 95%;
+    margin-bottom: 2em;
+  }
+
+  .edit-icon{
+    color: #0000ff;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .delete-icon {
+    color: #ff0000;
+    cursor: pointer;
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: 500;
+    color: #0000ff;
+}
+
