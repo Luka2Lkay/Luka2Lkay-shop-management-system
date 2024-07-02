@@ -40,6 +40,7 @@ export class EmployeesComponent implements OnInit {
 
   employees?: Employee[];
   public dataSource: any = [];
+  managers = "managers"
 
   displayedColumns: string[] = [
     'employeeNumber',
@@ -68,8 +69,6 @@ export class EmployeesComponent implements OnInit {
   }
 
   edit(data: Employee) {
-
-    console.log(data)
     const dialog = this._dialog.open(AddEmployeeComponent, {data});
 
     dialog.afterClosed().subscribe({

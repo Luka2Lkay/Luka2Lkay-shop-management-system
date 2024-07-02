@@ -25,3 +25,9 @@
     position: relative;
     left: 20%;
   }
+
+  a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #000;
+  }
