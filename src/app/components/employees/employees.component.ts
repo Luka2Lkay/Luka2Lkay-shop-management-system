@@ -12,7 +12,6 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { LowerCasePipe } from '@angular/common';
 import { DataSource } from '@angular/cdk/collections';
 
-
 @Component({
   selector: 'app-employees',
   standalone: true,
@@ -23,7 +22,7 @@ import { DataSource } from '@angular/cdk/collections';
     MatInputModule,
     MatTableModule,
     NavbarComponent,
-    LowerCasePipe
+    LowerCasePipe,
   ],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css',
@@ -36,7 +35,7 @@ export class EmployeesComponent implements OnInit {
 
   public dataSource: any = [];
 
-  managers = "managers"
+  managers = 'managers';
 
   displayedColumns: string[] = [
     'employeeNumber',
@@ -63,33 +62,34 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  edit(data: Employee) : void {
-    const dialog = this._dialog.open(AddEmployeeComponent, {data});
+  edit(data: Employee): void {
+    const dialog = this._dialog.open(AddEmployeeComponent, { data });
 
     dialog.afterClosed().subscribe({
       next: () => {
-        this.getAllEmployees()
-      },
-      error: console.log
-    })
-
-  }
-
-  delete(id: number) : void {
-    this._employeeService.deleteEmployee(id).subscribe({
-      next: () => {
-        window.location.reload();
+        this.getAllEmployees();
       },
       error: console.log,
     });
   }
 
-  applyFilter(event: Event) : void {
+  delete(id: number): void {
+    if (confirm('Are you sure?')) {
+      this._employeeService.deleteEmployee(id).subscribe({
+        next: () => {
+          window.location.reload();
+        },
+        error: console.log,
+      });
+    }
+  }
+
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openForm() : void {
+  openForm(): void {
     this._dialog.open(AddEmployeeComponent);
   }
 }

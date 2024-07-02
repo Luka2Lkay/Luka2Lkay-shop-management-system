@@ -58,12 +58,23 @@ export class ManagersComponent implements OnInit {
       this._managerService.getManagersWithEmployees().subscribe({
         next: res => {
           this.dataSource = new MatTableDataSource(res)
+          console.log(res)
         },
         error: console.log
       })
   }
 
-  edit(data: Manager) {}
+  edit(data: Manager) : void {
+
+  }
+
+delete(data: Manager) : void {
+
+}
+
+view(data: Manager) {
+  
+}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
