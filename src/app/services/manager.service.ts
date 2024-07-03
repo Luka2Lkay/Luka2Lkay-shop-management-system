@@ -27,8 +27,14 @@ export class ManagerService {
 
   updateManager(data: Manager): Observable<Manager> {
     return this._http.put<Manager>(
-      'https://localhost:7218/manager/update',
+      `${this.baseUrl}update`,
       data
+    );
+  }
+
+  deleteAManager(data: Manager): Observable<Manager> {
+    return this._http.delete<Manager>(
+      `${this.baseUrl}delete/${data.id}`
     );
   }
 }

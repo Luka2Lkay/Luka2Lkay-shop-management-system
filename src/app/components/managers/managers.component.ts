@@ -14,6 +14,12 @@ import { LowerCasePipe, NgFor, NgIf } from '@angular/common';
 import { ManagerService } from '../../services/manager.service';
 import { Employee } from '../../interfaces/employee';
 
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-managers',
   standalone: true,
@@ -33,11 +39,15 @@ import { Employee } from '../../interfaces/employee';
   styleUrl: './managers.component.css',
 })
 export class ManagersComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = "top";
+
   employees = 'employees';
 
   public dataSource: any = [];
 
   selectedManager?: string;
+  managersHeading?: string;
   managedEmployees?: Employee[];
   none?: string;
 
@@ -53,7 +63,8 @@ export class ManagersComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _managerService: ManagerService
+    private _managerService: ManagerService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -80,13 +91,27 @@ export class ManagersComponent implements OnInit {
     });
   }
 
-  delete(data: Manager): void {}
+  delete(data: Manager): void {
+    console.log(data);
+
+    if (confirm(`Are you sure ${data.fullName} is not managing anyone?`)) {
+      if (data.managedEmployees.length === 0) {
+        console.log('deleted');
+      } else {
+        this._snackBar.open('Failed to delete', 'close', {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+      }
+    }
+  }
 
   view(data: Manager) {
     this.selectedManager = data.fullName;
 
     if (data.managedEmployees.length === 0) {
       this.managedEmployees = [];
+      this.managersHeading = "Employees Managed by"
       this.none = 'NONE';
     } else {
       this.managedEmployees = data.managedEmployees;

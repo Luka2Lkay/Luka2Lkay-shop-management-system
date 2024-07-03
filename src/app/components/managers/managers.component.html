@@ -47,7 +47,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let row">
-      <mat-icon class="delete-icon" (click)="delete(row.id)">delete</mat-icon>
+      <mat-icon class="delete-icon" (click)="delete(row)">delete</mat-icon>
       <mat-icon class="edit-icon" (click)="edit(row)">edit</mat-icon>
       <mat-icon class="view-icon" (click)="view(row)">view_list</mat-icon>
   </ng-container>
@@ -61,30 +61,27 @@
   </tr>
 </table>
 
-<h2>Employees Managed by {{selectedManager}}</h2>
+<div class="employees-container">
+  <h2>{{managersHeading}} {{selectedManager}}</h2>
 
-<h3>{{none}}</h3>
-
-<table class="employees" *ngFor="let employee of managedEmployees">
-  <thead>
-  <tr>
-    <th>Employee Number</th>
-    <th>Title</th>
-    <th>fullName</th>
-    <th>IsActive</th>
-  </tr>
-</thead>
-  <tbody>
-    <tr>
-      <td>{{employee.employeeNumber}}</td>
-      <td>{{employee.title}}</td>
-      <td>{{employee.fullName}}</td>
-      <td>{{employee.isActive}}</td>
-    </tr>
-  </tbody>
-</table>
-
-<div *ngIf="selectedManager">
-  <h3 *ngIf="!managedEmployees">None</h3>
+  <h3>{{none}}</h3>
+  
+  <table class="employees" *ngFor="let employee of managedEmployees">
+    <thead>
+      <tr>
+        <th>Employee Number</th>
+        <th>Title</th>
+        <th>fullName</th>
+        <th>IsActive</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{employee.employeeNumber}}</td>
+        <td>{{employee.title}}</td>
+        <td>{{employee.fullName}}</td>
+        <td>{{employee.isActive}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
