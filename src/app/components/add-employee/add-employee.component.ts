@@ -69,6 +69,7 @@ export class AddEmployeeComponent implements OnInit {
 
   managerNames?: string[];
   managers?: Manager[];
+  titleOptions: string[] = ["Cashier", "General Worker", "Packer"]
   genderOptions: string[] = ['Male', 'Female'];
   activeOptions: boolean[] = [true, false];
 

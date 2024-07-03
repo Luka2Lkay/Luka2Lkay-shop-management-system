@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { ManagerService } from '../../services/manager.service';
 
 import {
   MAT_DIALOG_DATA,
@@ -48,7 +49,7 @@ import { NgFor } from '@angular/common';
 export class AddManagerComponent implements OnInit {
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Manager) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Manager, private _managerService: ManagerService) {}
 
   managerForm: FormGroup = new FormGroup({
     employeeNumber: new FormControl(''),
@@ -64,10 +65,26 @@ export class AddManagerComponent implements OnInit {
 
   ngOnInit(): void {
     this.managerForm.patchValue(this.data)
+    
   }
 
   genderOptions: string[] = ['Male', 'Female'];
   activeOptions: boolean[] = [true, false];
 
-  save(): void {}
+  save(): void {
+    if(this.managerForm.valid) {
+      const formDetails = this.managerForm.value
+      if(this.data) {
+        formDetails.id = this.data.id
+      
+        this._managerService.updateManager(formDetails).subscribe({
+          next: () => window.location.reload(),
+          error: console.log
+        })
+      }
+
+    } else {
+
+    }
+  }
 }

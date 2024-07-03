@@ -12,8 +12,11 @@
             </mat-form-field>
 
             <mat-form-field id="title" appearance="outline">
-                <mat-label>Title</mat-label>
-                <input matInput formControlName="title" required="true">
+                <mat-label for="title">Title</mat-label>
+                <mat-select formControlName="title" require="true">
+                    <mat-option *ngFor="let title of titleOptions"
+                        [value]="title">{{title}}</mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
 

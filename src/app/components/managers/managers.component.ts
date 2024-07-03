@@ -10,8 +10,9 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { RouterLink } from '@angular/router';
 import { AddManagerComponent } from '../add-manager/add-manager.component';
 import { Manager } from '../../interfaces/manager';
-import { LowerCasePipe } from '@angular/common';
+import { LowerCasePipe, NgFor, NgIf } from '@angular/common';
 import { ManagerService } from '../../services/manager.service';
+import { Employee } from '../../interfaces/employee';
 
 @Component({
   selector: 'app-managers',
@@ -25,6 +26,8 @@ import { ManagerService } from '../../services/manager.service';
     MatInputModule,
     MatIconModule,
     LowerCasePipe,
+    NgFor,
+    NgIf,
   ],
   templateUrl: './managers.component.html',
   styleUrl: './managers.component.css',
@@ -33,6 +36,10 @@ export class ManagersComponent implements OnInit {
   employees = 'employees';
 
   public dataSource: any = [];
+
+  selectedManager?: string;
+  managedEmployees?: Employee[];
+  none?: string;
 
   displayedColumns: string[] = [
     'employeeNumber',
@@ -50,25 +57,21 @@ export class ManagersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getManagersWithEmployees()
+    this.getManagersWithEmployees();
   }
 
-
-  getManagersWithEmployees() : void {
-      this._managerService.getManagersWithEmployees().subscribe({
-        next: res => {
-          this.dataSource = new MatTableDataSource(res)
-          console.log(res)
-        },
-        error: console.log
-      })
+  getManagersWithEmployees(): void {
+    this._managerService.getManagersWithEmployees().subscribe({
+      next: (res) => {
+        this.dataSource = new MatTableDataSource(res);
+      },
+      error: console.log,
+    });
   }
 
-  edit(data: Manager) : void {
-
+  edit(data: Manager): void {
     const dialog = this._dialog.open(AddManagerComponent, { data });
 
-    
     dialog.afterClosed().subscribe({
       next: () => {
         this.getManagersWithEmployees();
@@ -77,13 +80,19 @@ export class ManagersComponent implements OnInit {
     });
   }
 
-delete(data: Manager) : void {
+  delete(data: Manager): void {}
 
-}
+  view(data: Manager) {
+    this.selectedManager = data.fullName;
 
-view(data: Manager) {
-
-}
+    if (data.managedEmployees.length === 0) {
+      this.managedEmployees = [];
+      this.none = 'NONE';
+    } else {
+      this.managedEmployees = data.managedEmployees;
+      this.none = '';
+    }
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

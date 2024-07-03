@@ -6,8 +6,15 @@ h1 {
 /* Structure */
 table {
     width: 100%;
+    margin-bottom: 2em;
   }
   
+h3 {
+  text-align: center;
+  color: red;
+  font-weight: 400;
+}
+
   .mat-mdc-form-field {
     font-size: 14px;
     width: 100%;
@@ -32,7 +39,17 @@ table {
     margin-left: 10px;
     cursor: pointer;
   }
+
+  .view-icon{
+    color: #008000;
+    margin-left: 10px;
+    cursor: pointer;
+  }
   
+h2{
+  text-align: center;
+}
+
   .delete-icon {
     color: #ff0000;
     cursor: pointer;
@@ -42,5 +59,23 @@ table {
     font-size: 3rem;
     font-weight: 500;
     color: #0000ff;
+}
+
+.employees {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+}
+
+.employees td, .employees th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.employees th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
 }
 
