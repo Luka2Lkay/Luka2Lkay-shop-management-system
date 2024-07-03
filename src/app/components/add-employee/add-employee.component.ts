@@ -4,13 +4,11 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeesService } from '../../services/employees.service';
 import { ManagerService } from '../../services/manager.service';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -97,6 +95,7 @@ export class AddEmployeeComponent implements OnInit {
       if (this.data) {
         if (this.managers) {
           for (let i = 0; i < this.managers.length; i++) {
+
             if (this.managers[i].fullName === formDetails.currentManager) {
               formDetails.managerId = this.managers[i].id;
               formDetails.id = this.data.id;
