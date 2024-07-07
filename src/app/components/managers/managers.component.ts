@@ -44,6 +44,8 @@ export class ManagersComponent implements OnInit {
 
   employees = 'employees';
 
+  status: string = "hide"
+
   public dataSource: any = [];
 
   selectedManager?: string;

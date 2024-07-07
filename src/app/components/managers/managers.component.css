@@ -82,3 +82,11 @@ h2{
 .employees-container{
   border: 1px solid red;
 }
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
