@@ -1,64 +1,66 @@
 h1 {
-    text-align: center;
-    margin-top: 2em;
+  text-align: center;
+  margin-top: 2em;
 }
 
 /* Structure */
 table {
-    width: 100%;
-    margin-bottom: 2em;
-  }
-  
+  width: 100%;
+  margin-bottom: 2em;
+  max-height: 100vh;
+  overflow: auto;
+}
+
 h3 {
   text-align: center;
   color: red;
   font-weight: 400;
 }
 
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 
-  .filter {
-    position: relative;
-    left: -4em;
-    width: 25%;
-  }
+.filter {
+  position: relative;
+  left: -4em;
+  width: 25%;
+}
 
-  .add-button {
-    background-color: #0000ff;
-    color: #fff;
-    position: relative;
-    left: 95%;
-    margin-bottom: 2em;
-  }
+.add-button {
+  background-color: #0000ff;
+  color: #fff;
+  position: relative;
+  left: 95%;
+  margin-bottom: 2em;
+}
 
-  .edit-icon{
-    color: #0000ff;
-    margin-left: 10px;
-    cursor: pointer;
-  }
+.edit-icon {
+  color: #0000ff;
+  margin-left: 10px;
+  cursor: pointer;
+}
 
-  .view-icon{
-    color: #008000;
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  
-h2{
+.view-icon {
+  color: #008000;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+h2 {
   text-align: center;
 }
 
-  .delete-icon {
-    color: #ff0000;
-    cursor: pointer;
-  }
+.delete-icon {
+  color: #ff0000;
+  cursor: pointer;
+}
 
-  .title {
-    font-size: 3rem;
-    font-weight: 500;
-    color: #0000ff;
+.title {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #0000ff;
 }
 
 .employees {
@@ -66,7 +68,8 @@ h2{
   border-collapse: collapse;
 }
 
-.employees td, .employees th {
+.employees td,
+.employees th {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -79,14 +82,7 @@ h2{
   color: white;
 }
 
-.employees-container{
-  border: 1px solid red;
-}
-
-.hide {
-  display: none;
-}
-
-.show {
-  display: block;
+.employees-container {
+  overflow: auto;
+  max-height: 100vh;
 }
