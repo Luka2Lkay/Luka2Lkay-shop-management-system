@@ -1,30 +1,27 @@
-<!-- <div class="employees-container"> -->
-
 <div mat-dialog-title class="modal-title">
   <h1>{{managersHeading}} {{selectedManager}}</h1>
 </div>
 
-
 <div mat-dialog-content class="content">
-<h2>{{none}}</h2>
 
+  <h2>{{none}}</h2>
 
-<table class="employees" *ngFor="let employee of managedEmployees">
-  <thead>
-    <tr>
-      <th>Employee Number</th>
-      <th>Title</th>
-      <th>fullName</th>
-      <th>IsActive</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{employee.employeeNumber}}</td>
-      <td>{{employee.title}}</td>
-      <td>{{employee.fullName}}</td>
-      <td>{{employee.isActive}}</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="employees" *ngFor="let employee of managedEmployees">
+    <thead>
+      <tr>
+        <th>Employee Number</th>
+        <th>Title</th>
+        <th>fullName</th>
+        <th>IsActive</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{employee.employeeNumber}}</td>
+        <td>{{employee.title}}</td>
+        <td>{{employee.fullName}}</td>
+        <td>{{employee.isActive}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

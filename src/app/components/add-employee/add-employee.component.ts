@@ -105,6 +105,7 @@ export class AddEmployeeComponent implements OnInit {
                 next: () => {
                   window.location.reload();
                 },
+                error: console.log
               });
             }
           }

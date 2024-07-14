@@ -82,7 +82,13 @@ export class AddManagerComponent implements OnInit {
           error: console.log
         })
       } else {
-        console.log(formDetails)
+        
+        this._managerService.addManager(formDetails).subscribe({
+          next: () => {
+            window.location.reload();
+          },
+          error: console.log
+        })
       }
 
     } 

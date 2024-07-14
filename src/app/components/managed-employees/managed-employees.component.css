@@ -3,6 +3,11 @@
     color: #0000ff;
 }
 
+h2 {
+    text-align: center;
+    color: #ff0000;
+}
+
 .content {
     padding-top: 10px;
     overflow: hidden;
