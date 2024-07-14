@@ -1,0 +1,32 @@
+.modal-title {
+    text-align: center;
+    color: #0000ff;
+}
+
+.content {
+    padding-top: 10px;
+    overflow: hidden;
+}
+
+.employees {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+.employees td,
+.employees th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.employees tbody tr {
+    color: black;
+}
+
+.employees th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}

@@ -41,7 +41,7 @@ import { ManagedEmployeesComponent } from '../managed-employees/managed-employee
 })
 export class ManagersComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-  verticalPosition: MatSnackBarVerticalPosition = "top";
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   employees = 'employees';
 
@@ -93,22 +93,24 @@ export class ManagersComponent implements OnInit {
   }
 
   delete(data: Manager): void {
-
     if (confirm(`Are you sure ${data.fullName} is not managing anyone?`)) {
       if (data.managedEmployees.length === 0) {
         this._managerService.deleteAManager(data).subscribe({
           next: () => {
             this._managerService.deleteAManager(data).subscribe({
               next: () => {
-                this._snackBar.open(`succesfully deleted ${data.fullName}`, 'close', {
-                  horizontalPosition: this.horizontalPosition,
-                  verticalPosition: this.verticalPosition,
-                });
-              }
-            })
-          }
-        })
-       
+                this._snackBar.open(
+                  `succesfully deleted ${data.fullName}`,
+                  'close',
+                  {
+                    horizontalPosition: this.horizontalPosition,
+                    verticalPosition: this.verticalPosition,
+                  }
+                );
+              },
+            });
+          },
+        });
       } else {
         this._snackBar.open('Failed to delete', 'close', {
           horizontalPosition: this.horizontalPosition,
@@ -119,19 +121,7 @@ export class ManagersComponent implements OnInit {
   }
 
   view(data: Manager) {
-
-    this._dialog.open(ManagedEmployeesComponent)
-
-    // this.selectedManager = data.fullName;
-
-    // if (data.managedEmployees.length === 0) {
-    //   this.managedEmployees = [];
-    //   this.managersHeading = "Employees Managed by"
-    //   this.none = 'NONE';
-    // } else {
-    //   this.managedEmployees = data.managedEmployees;
-    //   this.none = '';
-    // }
+    this._dialog.open(ManagedEmployeesComponent, { data });
   }
 
   applyFilter(event: Event) {
