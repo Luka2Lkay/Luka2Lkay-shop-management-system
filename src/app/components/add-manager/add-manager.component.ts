@@ -81,10 +81,10 @@ export class AddManagerComponent implements OnInit {
           next: () => window.location.reload(),
           error: console.log
         })
+      } else {
+        console.log(formDetails)
       }
 
-    } else {
-
-    }
+    } 
   }
 }

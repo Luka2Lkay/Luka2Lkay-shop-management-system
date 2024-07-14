@@ -10,7 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { LowerCasePipe } from '@angular/common';
-import { DataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-employees',

@@ -19,6 +19,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { ManagedEmployeesComponent } from '../managed-employees/managed-employees.component';
 
 @Component({
   selector: 'app-managers',
@@ -44,14 +45,12 @@ export class ManagersComponent implements OnInit {
 
   employees = 'employees';
 
-  status: string = "hide"
-
   public dataSource: any = [];
 
-  selectedManager?: string;
-  managersHeading?: string;
-  managedEmployees?: Employee[];
-  none?: string;
+  // selectedManager?: string;
+  // managersHeading?: string;
+  // managedEmployees?: Employee[];
+  // none?: string;
 
   displayedColumns: string[] = [
     'employeeNumber',
@@ -94,11 +93,22 @@ export class ManagersComponent implements OnInit {
   }
 
   delete(data: Manager): void {
-    console.log(data);
 
     if (confirm(`Are you sure ${data.fullName} is not managing anyone?`)) {
       if (data.managedEmployees.length === 0) {
-        console.log('deleted');
+        this._managerService.deleteAManager(data).subscribe({
+          next: () => {
+            this._managerService.deleteAManager(data).subscribe({
+              next: () => {
+                this._snackBar.open(`succesfully deleted ${data.fullName}`, 'close', {
+                  horizontalPosition: this.horizontalPosition,
+                  verticalPosition: this.verticalPosition,
+                });
+              }
+            })
+          }
+        })
+       
       } else {
         this._snackBar.open('Failed to delete', 'close', {
           horizontalPosition: this.horizontalPosition,
@@ -109,16 +119,19 @@ export class ManagersComponent implements OnInit {
   }
 
   view(data: Manager) {
-    this.selectedManager = data.fullName;
 
-    if (data.managedEmployees.length === 0) {
-      this.managedEmployees = [];
-      this.managersHeading = "Employees Managed by"
-      this.none = 'NONE';
-    } else {
-      this.managedEmployees = data.managedEmployees;
-      this.none = '';
-    }
+    this._dialog.open(ManagedEmployeesComponent)
+
+    // this.selectedManager = data.fullName;
+
+    // if (data.managedEmployees.length === 0) {
+    //   this.managedEmployees = [];
+    //   this.managersHeading = "Employees Managed by"
+    //   this.none = 'NONE';
+    // } else {
+    //   this.managedEmployees = data.managedEmployees;
+    //   this.none = '';
+    // }
   }
 
   applyFilter(event: Event) {

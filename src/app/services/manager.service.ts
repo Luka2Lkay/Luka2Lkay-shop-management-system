@@ -32,6 +32,13 @@ export class ManagerService {
     );
   }
 
+getOneManager(id: number) : Observable<Manager>{
+
+  const manager = this._http.get<Manager>(`${this.baseUrl}${id}`)
+
+  return manager
+}
+
   deleteAManager(data: Manager): Observable<Manager> {
     return this._http.delete<Manager>(
       `${this.baseUrl}delete/${data.id}`
