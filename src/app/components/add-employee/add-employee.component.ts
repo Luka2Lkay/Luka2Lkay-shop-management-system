@@ -58,7 +58,7 @@ export class AddEmployeeComponent implements OnInit {
     title: new FormControl(''),
     fullName: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^([A-Z][a-z]+)( [A-Z][a-z]+)*$/g),
+      Validators.pattern(/([A-Z][a-z]+)\s([A-Z][a-z]+)/g),
     ]),
     currentManager: new FormControl(''),
     dob: new FormControl(''),

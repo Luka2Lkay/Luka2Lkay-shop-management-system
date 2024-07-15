@@ -55,7 +55,7 @@ export class AddManagerComponent implements OnInit {
     employeeNumber: new FormControl(''),
     fullName: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^([A-Z][a-z]+)( [A-Z][a-z]+)*$/),
+      Validators.pattern(/([A-Z][a-z]+)\s([A-Z][a-z]+)/g),
     ]),
     dob: new FormControl(''),
     gender: new FormControl(''),
