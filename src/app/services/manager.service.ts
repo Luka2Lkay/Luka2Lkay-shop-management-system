@@ -12,45 +12,26 @@ export class ManagerService {
   private baseUrl: string = 'https://localhost:7218/manager/';
 
   addManager(data: Manager): Observable<Manager> {
-    const manager = this._http.post<Manager>(`${this.baseUrl}add`, data);
-
-    return manager;
+    return this._http.post<Manager>(`${this.baseUrl}add`, data);
   }
 
   getAllManagers(): Observable<Manager[]> {
-    const managers = this._http.get<any[]>(`${this.baseUrl}all-managers`);
-
-    return managers;
+    return this._http.get<any[]>(`${this.baseUrl}all-managers`);
   }
 
   getManagersWithEmployees(): Observable<Manager[]> {
-    const managers = this._http.get<Manager[]>(
-      `${this.baseUrl}managers-with-employees`
-    );
-
-    return managers;
+    return this._http.get<Manager[]>(`${this.baseUrl}managers-with-employees`);
   }
 
   updateManager(data: Manager): Observable<Manager> {
-    const updatedManager = this._http.put<Manager>(
-      `${this.baseUrl}update`,
-      data
-    );
-
-    return updatedManager;
+    return this._http.put<Manager>(`${this.baseUrl}update`, data);
   }
 
   getOneManager(id: number): Observable<Manager> {
-    const manager = this._http.get<Manager>(`${this.baseUrl}${id}`);
-
-    return manager;
+    return this._http.get<Manager>(`${this.baseUrl}${id}`);
   }
 
-  deleteAManager(data: Manager): Observable<Manager> {
-    const manager = this._http.delete<Manager>(
-      `${this.baseUrl}delete/${data.id}`
-    );
-
-    return manager;
+  deleteAManager(id: number): Observable<Manager> {
+    return this._http.delete<Manager>(`${this.baseUrl}delete?id=${id}`);
   }
 }

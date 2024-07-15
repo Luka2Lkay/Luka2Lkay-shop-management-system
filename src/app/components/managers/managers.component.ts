@@ -93,30 +93,24 @@ export class ManagersComponent implements OnInit {
   }
 
   delete(data: Manager): void {
-    if (confirm(`Are you sure ${data.fullName} is not managing anyone?`)) {
-      if (data.managedEmployees.length === 0) {
-        this._managerService.deleteAManager(data).subscribe({
+    if (confirm(`Are you sure ${data.fullName} is not managing anyone?`) && data.managedEmployees.length === 0) {
+        this._managerService.deleteAManager(data.id).subscribe({
           next: () => {
-            this._managerService.deleteAManager(data).subscribe({
-              next: () => {
-                this._snackBar.open(
-                  `succesfully deleted ${data.fullName}`,
-                  'close',
-                  {
-                    horizontalPosition: this.horizontalPosition,
-                    verticalPosition: this.verticalPosition,
-                  }
-                );
-              },
+            this._snackBar.open(`succesfully deleted ${data.fullName}`, 'close', {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
             });
+
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000)
           },
         });
-      } else {
-        this._snackBar.open('Failed to delete', 'close', {
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-        });
-      }
+    } else {
+      this._snackBar.open('Failed to delete', 'close', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
     }
   }
 

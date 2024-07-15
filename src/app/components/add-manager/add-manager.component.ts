@@ -59,13 +59,15 @@ export class AddManagerComponent implements OnInit {
     ]),
     dob: new FormControl(''),
     gender: new FormControl(''),
-    email: new FormControl(''),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)
+    ]),
     isActive: new FormControl(''),
   });
 
   ngOnInit(): void {
     this.managerForm.patchValue(this.data)
-    
   }
 
   genderOptions: string[] = ['Male', 'Female'];
