@@ -5,8 +5,8 @@
 <div mat-dialog-content class="content">
 
   <h2>{{none}}</h2>
-
-  <table class="employees" *ngFor="let employee of managedEmployees">
+<div>
+ <table>
     <thead>
       <tr>
         <th>Employee Number</th>
@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr class="employees" *ngFor="let employee of managedEmployees">
         <td>{{employee.employeeNumber}}</td>
         <td>{{employee.title}}</td>
         <td>{{employee.fullName}}</td>
@@ -24,4 +24,6 @@
       </tr>
     </tbody>
   </table>
+</div>
+ 
 </div>

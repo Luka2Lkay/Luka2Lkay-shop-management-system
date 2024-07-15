@@ -58,7 +58,7 @@ export class AddEmployeeComponent implements OnInit {
     title: new FormControl(''),
     fullName: new FormControl('', [
       Validators.required,
-      Validators.pattern(/([A-Z][a-z]+)\s([A-Z][a-z]+)/g),
+      Validators.pattern(/^([A-Z][a-z]+)\s([A-Z][a-z]+)*$/),
     ]),
     currentManager: new FormControl(''),
     dob: new FormControl(''),
@@ -69,7 +69,7 @@ export class AddEmployeeComponent implements OnInit {
     ]),
     isActive: new FormControl(''),
   });
-
+ 
   managerNames?: string[];
   managers?: Manager[];
   titleOptions: string[] = ["Cashier", "General Worker", "Packer"]

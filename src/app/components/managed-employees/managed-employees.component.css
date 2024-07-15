@@ -24,13 +24,12 @@ h2 {
     padding: 8px;
 }
 
-.employees tbody tr {
+.employees td {
     color: black;
 }
 
-.employees th {
-    padding-top: 12px;
-    padding-bottom: 12px;
+th {
+    padding: 12px;
     text-align: left;
     background-color: #04AA6D;
     color: white;
