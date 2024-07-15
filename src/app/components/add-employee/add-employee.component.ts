@@ -85,7 +85,7 @@ export class AddEmployeeComponent implements OnInit {
     this._managerService.getAllManagers().subscribe({
       next: (res: any) => {
         const names = res.map((object: Manager) => object.fullName);
-        this.managerNames = names;
+        names.length !== 0 ? this.managerNames = names : "None"
         this.managers = res;
       },
       error: console.log,

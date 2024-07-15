@@ -14,8 +14,7 @@
             <mat-form-field id="title" appearance="outline">
                 <mat-label for="title">Title</mat-label>
                 <mat-select formControlName="title" require="true">
-                    <mat-option *ngFor="let title of titleOptions"
-                        [value]="title">{{title}}</mat-option>
+                    <mat-option *ngFor="let title of titleOptions" [value]="title">{{title}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -26,15 +25,24 @@
                 <input matInput formControlName="fullName" required="true">
             </mat-form-field>
 
-             <mat-form-field id="currentManager" appearance="outline">
+            <mat-form-field id="currentManager" appearance="outline">
+
+                @if(managerNames && managerNames.length !== 0) {
                 <mat-label for="currentManager">Manager</mat-label>
+                } @else {
+                <mat-label for="currentManager" style="color: #ff0000">No Managers</mat-label>
+                }
+
+
+
                 <mat-select formControlName="currentManager" require="true">
+
                     <mat-option *ngFor="let currentManager of managerNames"
                         [value]="currentManager">{{currentManager}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            
-        </div> 
+
+        </div>
 
         <div class="row">
             <mat-form-field id="dob" appearance="outline">
@@ -61,14 +69,16 @@
             <mat-form-field id="isActive" appearance="outline">
                 <mat-label for="isActive">Active</mat-label>
                 <mat-select formControlName="isActive" require="true">
-                    <mat-option *ngFor="let active of activeOptions" [value]="active">{{active === true ? 'Yes' : 'No'}}</mat-option>
+                    <mat-option *ngFor="let active of activeOptions" [value]="active">{{active === true ? 'Yes' :
+                        'No'}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
         <div mat-dialog-actions>
             <button mat-raised-button mat-dialog-close>CANCEL</button>
-            <button mat-raised-button color="primary" [disabled]="!this.employeeForm.valid" type="submit">{{data ? 'UPDATE' : 'SAVE'}}</button>
+            <button mat-raised-button color="primary" [disabled]="!this.employeeForm.valid" type="submit">{{data ?
+                'UPDATE' : 'SAVE'}}</button>
         </div>
 
     </div>
