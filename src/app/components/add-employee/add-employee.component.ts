@@ -96,8 +96,7 @@ export class AddEmployeeComponent implements OnInit {
     if (this.employeeForm.valid) {
       const formDetails = this.employeeForm.value;
 
-      if (this.data) {
-        if (this.managers) {
+      if (this.data && this.managers) {
           for (let i = 0; i < this.managers.length; i++) {
 
             if (this.managers[i].fullName === formDetails.currentManager) {
@@ -112,7 +111,6 @@ export class AddEmployeeComponent implements OnInit {
               });
             }
           }
-        }
       } else {
         if (this.managers) {
           for (let i = 0; i < this.managers.length; i++) {
