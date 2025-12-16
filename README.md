@@ -1,3 +1,7 @@
+# Shop Management System
+
+This system manages employees and managers within a shop. It utilizes an Angular frontend for user interaction, an ASP.NET Core Web Api backend for business logic, and SQL Server for data storage. Key features include adding/removing managers and employees, assigning employees to managers, and a user-friendly interface with confirmation popups for deletions. The system prioritizes security and scalability while ensuring a smooth user experience.
+
 # How to run this app
 
 ## Prerequisites
